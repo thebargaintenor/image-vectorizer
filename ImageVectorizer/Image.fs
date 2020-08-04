@@ -29,7 +29,10 @@ let preprocess (bounds: Rectangle) (image: Bitmap): Bitmap =
     resized
 
 let quantizeByte (levels: int) (value: byte): int =
-    if levels = 0 then int value else (int value) / (255 / levels)
+    if levels = 0 then 
+        255 - int value 
+    else
+        int ((float levels) * (1.0 - (float value + 1.0) / 256.0))
 
 let grayscale (c: Color): byte =
     let r, g, b =
