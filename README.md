@@ -12,5 +12,5 @@ dotnet run image.png > vector.txt
 
 ## Requirements
 - .NET Core 3.1
-- ImageSharp
+- libgdiplus
 
