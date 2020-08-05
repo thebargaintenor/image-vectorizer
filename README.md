@@ -7,7 +7,20 @@ Basic intent is to crop and preprocess an image for use as a test vector for a t
 ## Usage
 
 ```sh
-dotnet run image.png > vector.txt
+USAGE: ImageVectorizer.exe [--help] --size <width> <height> [--levels <levels>] [--delimiter <delimiter>] <image>...
+
+IMAGES:
+
+    <image>...            Paths of images to embed
+
+OPTIONS:
+
+    --size, -s <width> <height>
+                          Width and height of vectorized image
+    --levels, -l <levels> Number of output levels for quantizing grayscale values (0 to n-1)
+    --delimiter, -d <delimiter>
+                          Delimiter for output vector
+    --help                display this list of options.
 ```
 
 ## Requirements
