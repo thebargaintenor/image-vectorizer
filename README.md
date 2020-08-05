@@ -7,6 +7,12 @@ Basic intent is to crop and preprocess an image for use as a test vector for a t
 ## Usage
 
 ```sh
+dotnet run -s 14 14 -l 5 -d , three.png > output/vector.txt
+```
+
+Or something of that ilk:
+
+```
 USAGE: ImageVectorizer.exe [--help] --size <width> <height> [--levels <levels>] [--delimiter <delimiter>] <image>...
 
 IMAGES:
@@ -25,5 +31,5 @@ OPTIONS:
 
 ## Requirements
 - .NET Core 3.1
-- libgdiplus
+- ImageSharp and Argu are dependencies, but are automatically imported at build
 
