@@ -1,5 +1,7 @@
 ﻿module Embedding
 
+open System
+
 open SixLabors.ImageSharp
 open SixLabors.ImageSharp.PixelFormats
 open SixLabors.ImageSharp.Processing
@@ -8,10 +10,10 @@ type TranslateTransform = { X: int; Y: int }
 
 let private resizeToFill (bounds: Rectangle) (image: Image<Rgb24>): Image<Rgb24> =
     let transformation (context: IImageProcessingContext) =
-        let resizeOptions = ResizeOptions()
-        resizeOptions.Mode <- ResizeMode.Crop
-        resizeOptions.Size <- Size(bounds.Width, bounds.Height)
-        resizeOptions.Sampler <- KnownResamplers.Bicubic
+        let resizeOptions =
+            ResizeOptions
+                (Mode = ResizeMode.Crop, Size = Size(bounds.Width, bounds.Height), Sampler = KnownResamplers.Bicubic)
+
         context.Resize(resizeOptions) |> ignore
 
     image.Clone(transformation)
@@ -38,7 +40,9 @@ let private sample (levels: int) (image: Image<Rgb24>): int array =
 let imgToVec (width: int) (height: int) (levels: int) (image: Image<Rgb24>): int array =
     let boundingBox = Rectangle(0, 0, width, height)
     use processed = resizeToFill boundingBox image
-    printfn "w%d h%d" processed.Width processed.Height
     processed |> sample levels
 
 let loadImage (path: string): Image<Rgb24> = Image.Load<Rgb24>(path)
+
+let format (delimiter: string) (vec: int array) =
+    String.Join(delimiter, Array.map string vec)
