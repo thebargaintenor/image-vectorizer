@@ -11,10 +11,10 @@ type CliArguments =
     interface IArgParserTemplate with
         member this.Usage = 
             match this with
-            | Size -> "Width and height of vectorized image"
-            | Levels -> "Number of output levels for quantizing grayscale values (0 to n-1)"
-            | Delimiter -> "Delimiter for output vector"
-            | Images -> "Paths of images to embed"
+            | Size _ -> "Width and height of vectorized image"
+            | Levels _ -> "Number of output levels for quantizing grayscale values (0 to n-1)"
+            | Delimiter _ -> "Delimiter for output vector"
+            | Images _ -> "Paths of images to embed"
 
 module Constraints =
     let parseSize (width: int, height: int) =
